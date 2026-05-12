@@ -2,14 +2,17 @@ import { useState, useEffect } from 'react'
 import IncidentMap from './components/Map/IncidentMap'
 import StatsPanel from './components/Dashboard/StatsPanel'
 import IncidentFeed from './components/Dashboard/IncidentFeed'
-import TimelineFilter from './components/Dashboard/TimelineFilter'
+import FilterPanel from './components/Dashboard/FilterPanel'
+import type { Filters } from './components/Dashboard/FilterPanel'
 import EvidenceCard from './components/Report/EvidenceCard'
 import { MOCK_INCIDENTS, MOCK_STATS } from './lib/mockData'
 import type { Incident, Stats } from './lib/types'
 
+const EMPTY_FILTERS: Filters = { year: null, month: null, provinsi: null, violation: null, severity: null }
+
 export default function App() {
-  const [selectedId, setSelectedId]     = useState<string | null>(null)
-  const [selectedYear, setSelectedYear] = useState<number | null>(null)
+  const [selectedId, setSelectedId] = useState<string | null>(null)
+  const [filters, setFilters]       = useState<Filters>(EMPTY_FILTERS)
   const [liveIncidents, setLiveIncidents] = useState<Incident[]>([])
 
   useEffect(() => {
@@ -26,9 +29,15 @@ export default function App() {
     ...liveIncidents.filter(l => !MOCK_INCIDENTS.find(m => m.id === l.id)),
   ]
 
-  const filteredIncidents = selectedYear
-    ? allIncidents.filter(i => new Date(i.source_date).getFullYear() === selectedYear)
-    : allIncidents
+  const filteredIncidents = allIncidents.filter(i => {
+    const d = new Date(i.source_date)
+    if (filters.year      && d.getFullYear()  !== filters.year)      return false
+    if (filters.month     != null && d.getMonth() !== filters.month) return false
+    if (filters.provinsi  && i.location.provinsi  !== filters.provinsi)  return false
+    if (filters.violation && i.violation_type     !== filters.violation) return false
+    if (filters.severity  && i.severity           !== filters.severity)  return false
+    return true
+  })
 
   const selectedIncident: Incident | null =
     filteredIncidents.find(i => i.id === selectedId) ?? null
@@ -41,7 +50,12 @@ export default function App() {
   }
 
   const handleSelect = (id: string) => setSelectedId(prev => prev === id ? null : id)
-  const handleYearSelect = (year: number | null) => { setSelectedYear(year); setSelectedId(null) }
+  const handleFilterChange = (f: Partial<Filters>) => {
+    setFilters(prev => ({ ...prev, ...f }))
+    setSelectedId(null)
+  }
+
+  const hasFilters = Object.values(filters).some(v => v !== null)
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100vh', background: 'var(--bg)' }}>
@@ -111,10 +125,10 @@ export default function App() {
         }}>
           <StatsPanel stats={stats} />
 
-          <TimelineFilter
-            incidents={MOCK_INCIDENTS}
-            selectedYear={selectedYear}
-            onYearSelect={handleYearSelect}
+          <FilterPanel
+            incidents={allIncidents}
+            filters={filters}
+            onFilterChange={handleFilterChange}
           />
 
           <div style={{
@@ -122,14 +136,14 @@ export default function App() {
             padding: '8px 14px', borderBottom: '1px solid var(--border)', flexShrink: 0,
           }}>
             <span style={{ fontSize: '11px', fontWeight: 600, color: 'var(--text-2)' }}>
-              {filteredIncidents.length} cases
+              {filteredIncidents.length} / {allIncidents.length} cases
             </span>
-            {selectedYear && (
-              <button onClick={() => handleYearSelect(null)} style={{
+            {hasFilters && (
+              <button onClick={() => handleFilterChange(EMPTY_FILTERS)} style={{
                 fontSize: '11px', color: 'var(--accent)', background: 'none',
                 border: 'none', cursor: 'pointer',
               }}>
-                Clear filter ×
+                Clear ×
               </button>
             )}
           </div>
