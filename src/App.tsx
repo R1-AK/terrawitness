@@ -95,12 +95,12 @@ export default function App() {
               fontSize: '10px', fontWeight: 600, padding: '2px 7px', borderRadius: '3px',
               background: 'rgba(14,116,144,0.08)', border: '1px solid rgba(14,116,144,0.2)',
               color: 'var(--accent)',
-            }}>RSS active</span>
+            }}>News</span>
             <span style={{
               fontSize: '10px', fontWeight: 600, padding: '2px 7px', borderRadius: '3px',
               background: 'var(--surface-2)', border: '1px solid var(--border)',
               color: 'var(--text-3)',
-            }}>X/Twitter planned</span>
+            }}>Social Media</span>
           </div>
 
           <div style={{ width: '1px', height: '16px', background: 'var(--border)' }} />
@@ -204,21 +204,6 @@ export default function App() {
         )}
       </div>
 
-      {/* Footer */}
-      <footer style={{
-        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        padding: '0 20px', height: '30px',
-        borderTop: '1px solid var(--border)',
-        background: 'var(--surface)',
-        flexShrink: 0,
-      }}>
-        <span style={{ fontSize: '11px', color: 'var(--text-3)', fontFamily: 'var(--font-mono)' }}>
-          TerraWitness · Falling Walls Lab Yogyakarta 2026
-        </span>
-        <span style={{ fontSize: '11px', color: 'var(--text-3)' }}>
-          Monash University Mining Spatial Data Intelligence Lab
-        </span>
-      </footer>
     </div>
   )
 }
