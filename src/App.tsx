@@ -8,7 +8,7 @@ import EvidenceCard from './components/Report/EvidenceCard'
 import { MOCK_INCIDENTS, MOCK_STATS } from './lib/mockData'
 import type { Incident, Stats } from './lib/types'
 
-const EMPTY_FILTERS: Filters = { year: null, month: null, provinsi: null, violation: null, severity: null }
+const EMPTY_FILTERS: Filters = { year: null, month: null, provinsi: null, severity: null }
 
 export default function App() {
   const [selectedId, setSelectedId] = useState<string | null>(null)
@@ -33,9 +33,8 @@ export default function App() {
     const d = new Date(i.source_date)
     if (filters.year      && d.getFullYear()  !== filters.year)      return false
     if (filters.month     != null && d.getMonth() !== filters.month) return false
-    if (filters.provinsi  && i.location.provinsi  !== filters.provinsi)  return false
-    if (filters.violation && i.violation_type     !== filters.violation) return false
-    if (filters.severity  && i.severity           !== filters.severity)  return false
+    if (filters.provinsi && i.location.provinsi !== filters.provinsi) return false
+    if (filters.severity && i.severity          !== filters.severity) return false
     return true
   })
 

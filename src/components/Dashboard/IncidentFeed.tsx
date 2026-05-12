@@ -7,23 +7,15 @@ const SEV_COLOR: Record<string, string> = {
   low:      'var(--ok)',
 }
 
-const VIOLATION_LABEL: Record<string, string> = {
-  illegal_clearing:       'Illegal clearing',
-  tailings_discharge:     'Tailings discharge',
-  unauthorized_expansion: 'Unauthorized expansion',
-  river_contamination:    'River contamination',
-  protected_area_breach:  'Protected area breach',
-}
-
 function formatDate(dateStr: string): string {
   const d = new Date(dateStr)
   return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: '2-digit' })
 }
 
 interface Props {
-  incidents: Incident[]
+  incidents:  Incident[]
   selectedId: string | null
-  onSelect: (id: string) => void
+  onSelect:   (id: string) => void
 }
 
 export default function IncidentFeed({ incidents, selectedId, onSelect }: Props) {
@@ -34,7 +26,7 @@ export default function IncidentFeed({ incidents, selectedId, onSelect }: Props)
   if (sorted.length === 0) {
     return (
       <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <span style={{ fontSize: '12px', color: 'var(--text-3)' }}>No cases in selected period</span>
+        <span style={{ fontSize: '13px', color: 'var(--text-3)' }}>No cases in selected period</span>
       </div>
     )
   }
@@ -53,9 +45,10 @@ export default function IncidentFeed({ incidents, selectedId, onSelect }: Props)
             style={{
               animationDelay: `${i * 25}ms`,
               width: '100%', textAlign: 'left',
-              display: 'flex', alignItems: 'flex-start', gap: '10px',
+              display: 'flex', alignItems: 'flex-start', gap: '11px',
               border: 'none', cursor: 'pointer',
-              padding: '10px 14px',
+              padding: '12px 14px',
+              borderLeft: `3px solid ${isSelected ? color : 'transparent'}`,
               borderBottom: '1px solid var(--border)',
               background: isSelected ? 'var(--surface-2)' : 'transparent',
               transition: 'background 0.1s',
@@ -69,25 +62,26 @@ export default function IncidentFeed({ incidents, selectedId, onSelect }: Props)
           >
             {/* Severity dot */}
             <span style={{
-              width: '7px', height: '7px', borderRadius: '50%',
-              background: color, flexShrink: 0, marginTop: '4px',
+              width: '8px', height: '8px', borderRadius: '50%',
+              background: color, flexShrink: 0, marginTop: '5px',
             }} />
 
             {/* Content */}
             <div style={{ flex: 1, minWidth: 0 }}>
-              <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: '6px', marginBottom: '2px' }}>
+              <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: '8px', marginBottom: '3px' }}>
                 <span style={{
-                  fontSize: '12px', fontWeight: 600, color: 'var(--text-1)',
-                  lineHeight: 1.3, letterSpacing: '-0.01em',
+                  fontSize: '14px', fontWeight: 700, color: 'var(--text-1)',
+                  lineHeight: 1.25, letterSpacing: '-0.01em',
+                  whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis',
                 }}>
-                  {VIOLATION_LABEL[inc.violation_type]}
+                  {inc.location.desa}
                 </span>
-                <span style={{ fontSize: '10px', color: 'var(--text-3)', fontFamily: 'var(--font-mono)', flexShrink: 0 }}>
+                <span style={{ fontSize: '11px', color: 'var(--text-3)', fontFamily: 'var(--font-mono)', flexShrink: 0 }}>
                   {formatDate(inc.source_date)}
                 </span>
               </div>
-              <span style={{ fontSize: '11px', color: 'var(--text-3)' }}>
-                {inc.location.desa}, {inc.location.kabupaten}
+              <span style={{ fontSize: '12px', color: 'var(--text-2)' }}>
+                {inc.location.kabupaten}
               </span>
             </div>
           </button>

@@ -1,22 +1,13 @@
 import type { Incident } from '../../lib/types'
 
 export interface Filters {
-  year:      number | null
-  month:     number | null
-  provinsi:  string | null
-  violation: string | null
-  severity:  string | null
+  year:     number | null
+  month:    number | null
+  provinsi: string | null
+  severity: string | null
 }
 
 const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
-
-const VIOLATION_SHORT: Record<string, string> = {
-  illegal_clearing:       'Clearing',
-  tailings_discharge:     'Tailings',
-  unauthorized_expansion: 'Expansion',
-  river_contamination:    'River',
-  protected_area_breach:  'Protected area',
-}
 
 const SEV_COLOR: Record<string, string> = {
   critical: 'var(--critical)',
@@ -26,17 +17,17 @@ const SEV_COLOR: Record<string, string> = {
 }
 
 interface Props {
-  incidents:       Incident[]
-  filters:         Filters
-  onFilterChange:  (f: Partial<Filters>) => void
+  incidents:      Incident[]
+  filters:        Filters
+  onFilterChange: (f: Partial<Filters>) => void
 }
 
 function SectionLabel({ label }: { label: string }) {
   return (
     <div style={{
-      fontSize: '9px', fontWeight: 700, letterSpacing: '0.12em',
+      fontSize: '10px', fontWeight: 700, letterSpacing: '0.1em',
       textTransform: 'uppercase', color: 'var(--text-3)',
-      marginBottom: '6px',
+      marginBottom: '7px',
     }}>
       {label}
     </div>
@@ -53,8 +44,8 @@ function Chip({
       onClick={onClick}
       disabled={disabled}
       style={{
-        fontSize: '11px', fontWeight: active ? 600 : 400,
-        padding: '3px 8px', borderRadius: '4px',
+        fontSize: '12px', fontWeight: active ? 600 : 400,
+        padding: '4px 10px', borderRadius: '5px',
         border: `1px solid ${active ? (color ?? 'var(--accent)') : 'var(--border)'}`,
         background: active ? (color ? `${color}18` : 'var(--accent-dim)') : 'transparent',
         color: active ? (color ?? 'var(--accent)') : disabled ? 'var(--border-2)' : 'var(--text-2)',
@@ -69,7 +60,6 @@ function Chip({
 }
 
 export default function FilterPanel({ incidents, filters, onFilterChange }: Props) {
-  // Derive available values from data
   const years = [...new Set(incidents.map(i => new Date(i.source_date).getFullYear()))].sort()
 
   const monthsWithData = new Set(
@@ -81,33 +71,31 @@ export default function FilterPanel({ incidents, filters, onFilterChange }: Prop
   )
 
   const provinces = [...new Set(incidents.map(i => i.location.provinsi))].sort()
-  const violations = [...new Set(incidents.map(i => i.violation_type))]
   const severities: Array<'critical'|'high'|'medium'|'low'> = ['critical','high','medium','low']
 
-  const activeCount = [filters.year, filters.month, filters.provinsi, filters.violation, filters.severity]
-    .filter(Boolean).length
+  const activeCount = Object.values(filters).filter(v => v !== null).length
 
   const toggle = <T,>(key: keyof Filters, val: T, current: T | null) =>
     onFilterChange({ [key]: current === val ? null : val, ...(key === 'year' ? { month: null } : {}) })
 
   return (
-    <div style={{ padding: '10px 14px 12px', borderBottom: '1px solid var(--border)' }}>
+    <div style={{ padding: '12px 14px 14px', borderBottom: '1px solid var(--border)' }}>
 
       {/* Header */}
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '10px' }}>
-        <span style={{ fontSize: '11px', fontWeight: 600, color: 'var(--text-2)' }}>
-          Filters {activeCount > 0 && (
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '12px' }}>
+        <span style={{ fontSize: '12px', fontWeight: 700, color: 'var(--text-1)' }}>
+          Filters{activeCount > 0 && (
             <span style={{
-              marginLeft: '4px', fontSize: '10px', fontWeight: 700,
+              marginLeft: '6px', fontSize: '11px', fontWeight: 700,
               background: 'var(--accent-dim)', color: 'var(--accent)',
-              padding: '1px 5px', borderRadius: '8px',
+              padding: '1px 6px', borderRadius: '8px',
             }}>{activeCount}</span>
           )}
         </span>
         {activeCount > 0 && (
           <button
-            onClick={() => onFilterChange({ year: null, month: null, provinsi: null, violation: null, severity: null })}
-            style={{ fontSize: '10px', color: 'var(--accent)', background: 'none', border: 'none', cursor: 'pointer' }}
+            onClick={() => onFilterChange({ year: null, month: null, provinsi: null, severity: null })}
+            style={{ fontSize: '11px', color: 'var(--accent)', background: 'none', border: 'none', cursor: 'pointer' }}
           >
             Clear all ×
           </button>
@@ -115,9 +103,9 @@ export default function FilterPanel({ incidents, filters, onFilterChange }: Prop
       </div>
 
       {/* DATE */}
-      <div style={{ marginBottom: '10px' }}>
+      <div style={{ marginBottom: '12px' }}>
         <SectionLabel label="Date" />
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '5px' }}>
           {years.map(y => (
             <Chip
               key={y} label={String(y)}
@@ -126,16 +114,14 @@ export default function FilterPanel({ incidents, filters, onFilterChange }: Prop
             />
           ))}
         </div>
-
-        {/* Month row — shown when a year is selected */}
         {filters.year && (
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px', marginTop: '5px' }}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '5px', marginTop: '6px' }}>
             {MONTHS.map((m, idx) => (
               <Chip
                 key={m} label={m}
                 active={filters.month === idx}
                 disabled={!monthsWithData.has(idx)}
-                onClick={() => !monthsWithData.has(idx) ? undefined : toggle('month', idx, filters.month)}
+                onClick={() => monthsWithData.has(idx) && toggle('month', idx, filters.month)}
               />
             ))}
           </div>
@@ -143,9 +129,9 @@ export default function FilterPanel({ incidents, filters, onFilterChange }: Prop
       </div>
 
       {/* LOCATION */}
-      <div style={{ marginBottom: '10px' }}>
+      <div style={{ marginBottom: '12px' }}>
         <SectionLabel label="Location" />
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '5px' }}>
           {provinces.map(p => (
             <Chip
               key={p} label={p}
@@ -156,24 +142,10 @@ export default function FilterPanel({ incidents, filters, onFilterChange }: Prop
         </div>
       </div>
 
-      {/* VIOLATION TYPE */}
-      <div style={{ marginBottom: '10px' }}>
-        <SectionLabel label="Violation type" />
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px' }}>
-          {violations.map(v => (
-            <Chip
-              key={v} label={VIOLATION_SHORT[v] ?? v}
-              active={filters.violation === v}
-              onClick={() => toggle('violation', v, filters.violation)}
-            />
-          ))}
-        </div>
-      </div>
-
       {/* SEVERITY */}
       <div>
         <SectionLabel label="Severity" />
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '5px' }}>
           {severities.filter(s => incidents.some(i => i.severity === s)).map(s => (
             <Chip
               key={s} label={s.charAt(0).toUpperCase() + s.slice(1)}
