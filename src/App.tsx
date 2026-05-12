@@ -56,6 +56,10 @@ export default function App() {
 
   const hasFilters = Object.values(filters).some(v => v !== null)
 
+  const SOCIAL_TYPES = new Set(['social_media', 'public_social_post'])
+  const isSocialSelected = selectedIncident ? SOCIAL_TYPES.has(selectedIncident.source_type) : false
+  const isNewsSelected   = selectedIncident ? !SOCIAL_TYPES.has(selectedIncident.source_type) : false
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100vh', background: 'var(--bg)' }}>
 
@@ -93,13 +97,17 @@ export default function App() {
             <span style={{ fontSize: '11px', color: 'var(--text-3)' }}>Sources:</span>
             <span style={{
               fontSize: '10px', fontWeight: 600, padding: '2px 7px', borderRadius: '3px',
-              background: 'rgba(14,116,144,0.08)', border: '1px solid rgba(14,116,144,0.2)',
-              color: 'var(--accent)',
+              background: isNewsSelected ? 'rgba(14,116,144,0.08)' : 'var(--surface-2)',
+              border: `1px solid ${isNewsSelected ? 'rgba(14,116,144,0.2)' : 'var(--border)'}`,
+              color: isNewsSelected ? 'var(--accent)' : 'var(--text-3)',
+              transition: 'all 0.15s',
             }}>News</span>
             <span style={{
               fontSize: '10px', fontWeight: 600, padding: '2px 7px', borderRadius: '3px',
-              background: 'var(--surface-2)', border: '1px solid var(--border)',
-              color: 'var(--text-3)',
+              background: isSocialSelected ? 'rgba(14,116,144,0.08)' : 'var(--surface-2)',
+              border: `1px solid ${isSocialSelected ? 'rgba(14,116,144,0.2)' : 'var(--border)'}`,
+              color: isSocialSelected ? 'var(--accent)' : 'var(--text-3)',
+              transition: 'all 0.15s',
             }}>Social Media</span>
           </div>
 
