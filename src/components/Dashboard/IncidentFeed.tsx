@@ -7,6 +7,14 @@ const SEV_COLOR: Record<string, string> = {
   low:      'var(--ok)',
 }
 
+const VIOLATION_LABEL: Record<string, string> = {
+  illegal_clearing:       'Illegal Clearing',
+  tailings_discharge:     'Tailings Discharge',
+  unauthorized_expansion: 'Unauthorized Expansion',
+  river_contamination:    'River Contamination',
+  protected_area_breach:  'Protected Area Breach',
+}
+
 function formatDate(dateStr: string): string {
   const d = new Date(dateStr)
   return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: '2-digit' })
@@ -74,14 +82,14 @@ export default function IncidentFeed({ incidents, selectedId, onSelect }: Props)
                   lineHeight: 1.25, letterSpacing: '-0.01em',
                   whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis',
                 }}>
-                  {inc.location.desa}
+                  {VIOLATION_LABEL[inc.violation_type] ?? inc.violation_type}
                 </span>
                 <span style={{ fontSize: '11px', color: 'var(--text-3)', fontFamily: 'var(--font-mono)', flexShrink: 0 }}>
                   {formatDate(inc.source_date)}
                 </span>
               </div>
               <span style={{ fontSize: '12px', color: 'var(--text-2)' }}>
-                {inc.location.kabupaten}
+                {inc.location.kabupaten}, {inc.location.provinsi}
               </span>
             </div>
           </button>
