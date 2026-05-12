@@ -480,7 +480,7 @@ export const MOCK_INCIDENTS: Incident[] = [
   },
   {
     id: 'TW-X-GECKO001',
-    status: 'geoparsing',
+    status: 'verified',
     severity: 'high',
     location: {
       lat: -1.47,
