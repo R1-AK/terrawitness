@@ -32,14 +32,11 @@ jobs:
           TWITTER_BEARER_TOKEN: ${{ secrets.TWITTER_BEARER_TOKEN }}
         run: python pipeline/fetch_social.py
 
-      - name: Run Telegram channel ingest
-        run: python pipeline/fetch_telegram.py
-
       - name: Commit if new incidents found
         run: |
           git config user.name  "TerraWitness Bot"
           git config user.email "bot@terrawitness.app"
-          git add public/incidents_live.json pipeline/seen_hashes.json pipeline/seen_social.json pipeline/seen_telegram.json
+          git add public/incidents_live.json pipeline/seen_hashes.json pipeline/seen_social.json
           if git diff --cached --quiet; then
             echo "No new incidents — skipping commit"
           else
