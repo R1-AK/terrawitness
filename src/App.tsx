@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import IncidentMap from './components/Map/IncidentMap'
 import StatsPanel from './components/Dashboard/StatsPanel'
 import IncidentFeed from './components/Dashboard/IncidentFeed'
@@ -6,18 +6,42 @@ import TimelineFilter from './components/Dashboard/TimelineFilter'
 import EvidenceCard from './components/Report/EvidenceCard'
 import PipelineStatus from './components/Pipeline/PipelineStatus'
 import { MOCK_INCIDENTS, MOCK_STATS } from './lib/mockData'
-import type { Incident } from './lib/types'
+import type { Incident, Stats } from './lib/types'
 
 export default function App() {
   const [selectedId, setSelectedId]     = useState<string | null>(null)
   const [selectedYear, setSelectedYear] = useState<number | null>(null)
+  const [liveIncidents, setLiveIncidents] = useState<Incident[]>([])
+
+  // Merge live auto-detected incidents with curated mock incidents
+  useEffect(() => {
+    fetch('/incidents_live.json')
+      .then(r => r.json())
+      .then((data: Incident[]) => {
+        if (Array.isArray(data) && data.length > 0) setLiveIncidents(data)
+      })
+      .catch(() => {})
+  }, [])
+
+  const allIncidents = [
+    ...MOCK_INCIDENTS,
+    // Only add live incidents not already present in mock data
+    ...liveIncidents.filter(l => !MOCK_INCIDENTS.find(m => m.id === l.id)),
+  ]
 
   const filteredIncidents = selectedYear
-    ? MOCK_INCIDENTS.filter(i => new Date(i.source_date).getFullYear() === selectedYear)
-    : MOCK_INCIDENTS
+    ? allIncidents.filter(i => new Date(i.source_date).getFullYear() === selectedYear)
+    : allIncidents
 
   const selectedIncident: Incident | null =
     filteredIncidents.find(i => i.id === selectedId) ?? null
+
+  const stats: Stats = {
+    ...MOCK_STATS,
+    total_incidents:    allIncidents.length,
+    violations_flagged: allIncidents.filter(i => i.violation_flag).length,
+    verified:           allIncidents.filter(i => i.status === 'verified' || i.status === 'routed').length,
+  }
 
   const handleSelect = (id: string) => setSelectedId(prev => prev === id ? null : id)
 
@@ -102,7 +126,7 @@ export default function App() {
             </p>
           </div>
 
-          <StatsPanel stats={MOCK_STATS} />
+          <StatsPanel stats={stats} />
 
           <TimelineFilter
             incidents={MOCK_INCIDENTS}

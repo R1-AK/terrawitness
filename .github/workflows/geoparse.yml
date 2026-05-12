@@ -1,0 +1,36 @@
+name: Geoparse RSS feeds
+
+on:
+  schedule:
+    - cron: '0 */2 * * *'   # every 2 hours, free on GitHub Actions
+  workflow_dispatch:         # manual trigger from GitHub UI
+
+jobs:
+  geoparse:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write        # needed to commit incidents_live.json back
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: pip install feedparser geopandas shapely
+
+      - name: Run geoparse pipeline
+        run: python pipeline/fetch_and_geoparse.py
+
+      - name: Commit updated incidents_live.json
+        run: |
+          git config user.name  "TerraWitness Bot"
+          git config user.email "bot@terrawitness.app"
+          git add public/incidents_live.json pipeline/seen_hashes.json
+          git diff --cached --quiet || git commit -m "chore: update live incidents [skip ci]"
+          git push

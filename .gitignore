@@ -25,3 +25,7 @@ dist-ssr
 
 .vercel
 .env*.local
+
+pipeline/.env
+pipeline/__pycache__/
+*.pyc
