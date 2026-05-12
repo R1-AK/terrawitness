@@ -1,0 +1,139 @@
+{
+  "TW-REAL-001": {
+    "signal_point": [
+      0.88,
+      128.22
+    ],
+    "signal_type": "teluk",
+    "label": "Teluk Buli",
+    "source": "manual"
+  },
+  "TW-REAL-002": {
+    "signal_point": [
+      0.88,
+      128.22
+    ],
+    "signal_type": "teluk",
+    "label": "Teluk Buli",
+    "source": "manual"
+  },
+  "TW-REAL-003": {
+    "signal_point": [
+      -4.29,
+      123.19
+    ],
+    "signal_type": "river",
+    "label": "Wawonii freshwater source",
+    "source": "manual"
+  },
+  "TW-REAL-004": {
+    "signal_point": [
+      -4.34,
+      123.2
+    ],
+    "signal_type": "coastal",
+    "label": "SE Wawonii coast",
+    "source": "manual"
+  },
+  "TW-REAL-005": {
+    "signal_point": [
+      -3.96,
+      122.38
+    ],
+    "signal_type": "coastal",
+    "label": "Morosi / Konawe mangrove coast",
+    "source": "manual"
+  },
+  "TW-REAL-006": {
+    "signal_point": [
+      -5.28952,
+      121.82306
+    ],
+    "signal_type": "coastal",
+    "label": "Kabaena coast",
+    "source": "osm"
+  },
+  "TW-REAL-007": {
+    "signal_point": [
+      0.50199,
+      127.65542
+    ],
+    "signal_type": "river",
+    "label": "Sungai Sagea",
+    "source": "osm"
+  },
+  "TW-REAL-008": {
+    "signal_point": [
+      0.4,
+      127.96
+    ],
+    "signal_type": "river",
+    "label": "Ale Doma / Kobe river",
+    "source": "manual"
+  },
+  "TW-SOCIAL-001": {
+    "signal_point": [
+      -0.42,
+      129.88
+    ],
+    "signal_type": "coastal",
+    "label": "Pulau Gag reef coast",
+    "source": "manual"
+  },
+  "TW-KOMPAS-001": {
+    "signal_point": [
+      -3.05,
+      122.0
+    ],
+    "signal_type": "teluk",
+    "label": "Teluk Tomori / Morowali Bay",
+    "source": "manual_corrected",
+    "note": "Bahodopi / Morowali Bay coast near IMIP"
+  },
+  "TW-KOMPAS-002": {
+    "signal_point": [
+      -2.6,
+      121.46
+    ],
+    "signal_type": "river",
+    "label": "Bungku river estuary",
+    "source": "manual"
+  },
+  "TW-TEMPO-001": {
+    "signal_point": [
+      -0.42,
+      129.88
+    ],
+    "signal_type": "coastal",
+    "label": "Raja Ampat reef coast",
+    "source": "manual"
+  },
+  "TW-TEMPO-002": {
+    "signal_point": [
+      -3.57,
+      122.22
+    ],
+    "signal_type": "river",
+    "label": "Lasolo river",
+    "source": "manual"
+  },
+  "TW-ANTARA-001": {
+    "signal_point": [
+      1.82,
+      128.0
+    ],
+    "signal_type": "teluk",
+    "label": "Teluk Kao",
+    "source": "manual"
+  },
+  "TW-CNN-001": {
+    "signal_point": [
+      -3.08,
+      122.01
+    ],
+    "signal_type": "coastal",
+    "label": "Morowali IMIP coast",
+    "source": "manual_corrected",
+    "note": "IMIP Bahodopi coastal boundary, not BINEKA KARYA lease"
+  }
+}
