@@ -1,22 +1,22 @@
 @import "tailwindcss";
 
 :root {
-  --bg:          #080B11;
-  --surface:     #0D1117;
-  --surface-2:   #131820;
-  --border:      #1C2333;
-  --border-2:    #243045;
-  --text-1:      #E2E8F4;
-  --text-2:      #6B7E99;
-  --text-3:      #384455;
-  --accent:      #22D3EE;
-  --accent-dim:  rgba(34,211,238,0.10);
-  --accent-glow: rgba(34,211,238,0.04);
-  --critical:    #F43F5E;
-  --high:        #FB923C;
-  --medium:      #FACC15;
-  --ok:          #34D399;
-  --font-ui:     'Manrope', system-ui, sans-serif;
+  --bg:          #F2F1EE;
+  --surface:     #FFFFFF;
+  --surface-2:   #F7F6F3;
+  --border:      #E4E3DF;
+  --border-2:    #D0CFC9;
+  --text-1:      #1A1917;
+  --text-2:      #5C5B57;
+  --text-3:      #9C9B96;
+  --accent:      #0E7490;
+  --accent-dim:  rgba(14,116,144,0.08);
+  --accent-glow: rgba(14,116,144,0.04);
+  --critical:    #C41C1C;
+  --high:        #C2570A;
+  --medium:      #A16207;
+  --ok:          #15803D;
+  --font-ui:     'Inter', 'Manrope', system-ui, sans-serif;
   --font-mono:   'DM Mono', monospace;
 }
 
@@ -37,80 +37,68 @@ body {
   flex-direction: column;
 }
 
-/* Scrollbar */
-::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar { width: 3px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--border-2); border-radius: 2px; }
-::-webkit-scrollbar-thumb:hover { background: var(--text-3); }
 
 /* Leaflet */
-.leaflet-container { width: 100%; height: 100%; background: #05080F; }
+.leaflet-container { width: 100%; height: 100%; background: #E8E4DC; }
 .leaflet-control-attribution { display: none !important; }
 .leaflet-bar a {
-  background: var(--surface-2) !important;
+  background: var(--surface) !important;
   color: var(--text-2) !important;
   border-color: var(--border) !important;
+  font-size: 14px !important;
 }
-.leaflet-bar a:hover { background: var(--border) !important; }
+.leaflet-bar a:hover { background: var(--surface-2) !important; }
 
-/* Severity left-border strips */
-.sev-critical { border-left: 3px solid var(--critical); }
-.sev-high     { border-left: 3px solid var(--high); }
-.sev-medium   { border-left: 3px solid var(--medium); }
-.sev-low      { border-left: 3px solid var(--ok); }
-
-/* Severity dot colors */
+/* Severity dots */
 .dot-critical { background: var(--critical); }
 .dot-high     { background: var(--high); }
 .dot-medium   { background: var(--medium); }
 .dot-low      { background: var(--ok); }
 
-/* Source link button */
+/* Source link */
 .source-link-button {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 6px;
   width: 100%;
-  padding: 10px 16px;
-  border: 1px solid var(--accent-dim);
+  padding: 9px 16px;
+  border: 1px solid var(--border);
   border-radius: 6px;
-  background: var(--accent-dim);
-  color: var(--accent);
+  background: var(--surface-2);
+  color: var(--text-2);
   font-family: var(--font-ui);
-  font-size: 13px;
-  font-weight: 600;
+  font-size: 12px;
+  font-weight: 500;
   text-decoration: none;
-  letter-spacing: 0.01em;
-  transition: background 0.15s, border-color 0.15s;
+  transition: background 0.12s, border-color 0.12s;
 }
 .source-link-button:hover {
-  background: rgba(34,211,238,0.16);
-  border-color: rgba(34,211,238,0.35);
+  background: var(--border);
+  border-color: var(--border-2);
+  color: var(--text-1);
 }
 
-/* Keyframes */
 @keyframes pulseRing {
-  0%   { transform: scale(0.8); opacity: 0.8; }
-  100% { transform: scale(3.2); opacity: 0; }
+  0%   { transform: scale(0.8); opacity: 0.7; }
+  100% { transform: scale(3.5); opacity: 0; }
 }
 @keyframes fadeInRight {
-  from { opacity: 0; transform: translateX(20px); }
+  from { opacity: 0; transform: translateX(16px); }
   to   { opacity: 1; transform: translateX(0); }
 }
 @keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(8px); }
+  from { opacity: 0; transform: translateY(6px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 @keyframes blink {
   0%, 100% { opacity: 1; }
-  50%       { opacity: 0.25; }
-}
-@keyframes scanPulse {
-  0%, 100% { opacity: 0.5; }
-  50%       { opacity: 1; }
+  50%       { opacity: 0.3; }
 }
 
-.panel-enter  { animation: fadeInRight 0.25s ease-out forwards; }
-.feed-item-enter { animation: fadeInUp 0.3s ease-out forwards; }
-.live-dot { animation: blink 2s ease-in-out infinite; }
+.panel-enter     { animation: fadeInRight 0.22s ease-out forwards; }
+.feed-item-enter { animation: fadeInUp 0.2s ease-out forwards; }
+.live-dot        { animation: blink 2s ease-in-out infinite; }

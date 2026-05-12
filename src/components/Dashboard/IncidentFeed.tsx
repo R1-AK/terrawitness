@@ -7,15 +7,6 @@ const SEV_COLOR: Record<string, string> = {
   low:      'var(--ok)',
 }
 
-const STATUS_LABEL: Record<string, string> = {
-  incoming:   'Incoming',
-  geoparsing: 'Geoparsing',
-  satellite:  'Satellite',
-  landuse:    'Land Use',
-  verified:   'Verified',
-  routed:     'Routed',
-}
-
 const VIOLATION_LABEL: Record<string, string> = {
   illegal_clearing:       'Illegal clearing',
   tailings_discharge:     'Tailings discharge',
@@ -26,7 +17,7 @@ const VIOLATION_LABEL: Record<string, string> = {
 
 function formatDate(dateStr: string): string {
   const d = new Date(dateStr)
-  return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })
+  return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: '2-digit' })
 }
 
 interface Props {
@@ -43,7 +34,7 @@ export default function IncidentFeed({ incidents, selectedId, onSelect }: Props)
   if (sorted.length === 0) {
     return (
       <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <span style={{ fontSize: '12px', color: 'var(--text-3)' }}>No incidents in selected period</span>
+        <span style={{ fontSize: '12px', color: 'var(--text-3)' }}>No cases in selected period</span>
       </div>
     )
   }
@@ -60,14 +51,14 @@ export default function IncidentFeed({ incidents, selectedId, onSelect }: Props)
             onClick={() => onSelect(inc.id)}
             className="feed-item-enter"
             style={{
-              animationDelay: `${i * 30}ms`,
+              animationDelay: `${i * 25}ms`,
               width: '100%', textAlign: 'left',
-              display: 'block', border: 'none', cursor: 'pointer',
-              padding: '12px 16px 12px 13px',
-              borderLeft: `3px solid ${isSelected ? color : 'transparent'}`,
+              display: 'flex', alignItems: 'flex-start', gap: '10px',
+              border: 'none', cursor: 'pointer',
+              padding: '10px 14px',
               borderBottom: '1px solid var(--border)',
-              background: isSelected ? `${color}08` : 'transparent',
-              transition: 'background 0.12s, border-color 0.12s',
+              background: isSelected ? 'var(--surface-2)' : 'transparent',
+              transition: 'background 0.1s',
             }}
             onMouseEnter={e => {
               if (!isSelected) (e.currentTarget as HTMLElement).style.background = 'var(--surface-2)'
@@ -76,57 +67,28 @@ export default function IncidentFeed({ incidents, selectedId, onSelect }: Props)
               if (!isSelected) (e.currentTarget as HTMLElement).style.background = 'transparent'
             }}
           >
-            {/* Top row: violation type + date */}
-            <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '8px', marginBottom: '4px' }}>
-              <span style={{ fontSize: '12px', fontWeight: 700, color: 'var(--text-1)', lineHeight: 1.2 }}>
-                {VIOLATION_LABEL[inc.violation_type]}
-              </span>
-              <span style={{ fontSize: '10px', color: 'var(--text-3)', fontFamily: 'var(--font-mono)', flexShrink: 0 }}>
-                {formatDate(inc.source_date)}
-              </span>
-            </div>
+            {/* Severity dot */}
+            <span style={{
+              width: '7px', height: '7px', borderRadius: '50%',
+              background: color, flexShrink: 0, marginTop: '4px',
+            }} />
 
-            {/* Location */}
-            <div style={{ fontSize: '11px', color: 'var(--text-2)', marginBottom: '6px' }}>
-              {inc.location.desa}, {inc.location.kabupaten}
-            </div>
-
-            {/* Excerpt */}
-            <p style={{
-              fontSize: '11px', color: 'var(--text-2)', lineHeight: 1.55,
-              display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical',
-              overflow: 'hidden', marginBottom: '8px',
-            }}>
-              {inc.post_text}
-            </p>
-
-            {/* Bottom row: badges */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-              {/* Severity */}
-              <span style={{
-                fontSize: '9px', fontWeight: 800, textTransform: 'uppercase',
-                letterSpacing: '0.08em', color, fontFamily: 'var(--font-mono)',
-              }}>
-                {inc.severity}
+            {/* Content */}
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: '6px', marginBottom: '2px' }}>
+                <span style={{
+                  fontSize: '12px', fontWeight: 600, color: 'var(--text-1)',
+                  lineHeight: 1.3, letterSpacing: '-0.01em',
+                }}>
+                  {VIOLATION_LABEL[inc.violation_type]}
+                </span>
+                <span style={{ fontSize: '10px', color: 'var(--text-3)', fontFamily: 'var(--font-mono)', flexShrink: 0 }}>
+                  {formatDate(inc.source_date)}
+                </span>
+              </div>
+              <span style={{ fontSize: '11px', color: 'var(--text-3)' }}>
+                {inc.location.desa}, {inc.location.kabupaten}
               </span>
-              <span style={{ color: 'var(--text-3)', fontSize: '10px' }}>·</span>
-              {/* Status */}
-              <span style={{ fontSize: '10px', color: 'var(--text-3)' }}>
-                {STATUS_LABEL[inc.status]}
-              </span>
-              <span style={{ color: 'var(--text-3)', fontSize: '10px' }}>·</span>
-              {/* Source */}
-              <span style={{ fontSize: '10px', color: 'var(--text-3)' }}>
-                {inc.source_name}
-              </span>
-              {/* Area */}
-              {inc.area_ha > 0 && (
-                <>
-                  <span style={{ color: 'var(--text-3)', fontSize: '10px', marginLeft: 'auto' }}>
-                    {inc.area_ha} ha
-                  </span>
-                </>
-              )}
             </div>
           </button>
         )
