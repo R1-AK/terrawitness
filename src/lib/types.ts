@@ -13,6 +13,7 @@ export type SourceType =
   | 'investigation'
   | 'official_statement'
   | 'public_social_post'
+  | 'social_media'
 
 export interface Incident {
   id: string
@@ -56,7 +57,17 @@ export interface Incident {
     uncertainty_km: number
     evidence: string[]
   }
-  thumbnail_before?: string   // color stop for gradient mock
+  lease_match?: {
+    name: string
+    activity: string
+    commodity: string
+    area_ha: number
+    dist_km: number
+    centroid: [number, number]
+  }
+  signal_type?: string
+  witness_score?: number
+  thumbnail_before?: string
   thumbnail_after?: string
 }
 
