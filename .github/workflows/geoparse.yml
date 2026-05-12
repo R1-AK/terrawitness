@@ -22,16 +22,21 @@ jobs:
           cache: 'pip'
 
       - name: Install dependencies
-        run: pip install feedparser geopandas shapely
+        run: pip install feedparser geopandas shapely requests
 
-      - name: Run geoparse pipeline
+      - name: Run RSS geoparse pipeline
         run: python pipeline/fetch_and_geoparse.py
+
+      - name: Run social media ingest
+        env:
+          TWITTER_BEARER_TOKEN: ${{ secrets.TWITTER_BEARER_TOKEN }}
+        run: python pipeline/fetch_social.py
 
       - name: Commit if new incidents found
         run: |
           git config user.name  "TerraWitness Bot"
           git config user.email "bot@terrawitness.app"
-          git add public/incidents_live.json pipeline/seen_hashes.json
+          git add public/incidents_live.json pipeline/seen_hashes.json pipeline/seen_social.json
           if git diff --cached --quiet; then
             echo "No new incidents — skipping commit"
           else
