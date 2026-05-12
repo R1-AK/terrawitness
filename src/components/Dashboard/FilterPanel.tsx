@@ -71,7 +71,34 @@ export default function FilterPanel({ incidents, filters, onFilterChange }: Prop
   )
 
   const provinces = [...new Set(incidents.map(i => i.location.provinsi))].sort()
+
+  // Provinces that have at least one case matching the other active filters
+  const activeProvinces = new Set(
+    incidents
+      .filter(i => {
+        const d = new Date(i.source_date)
+        if (filters.year     && d.getFullYear() !== filters.year)   return false
+        if (filters.month != null && d.getMonth() !== filters.month) return false
+        if (filters.severity && i.severity !== filters.severity)     return false
+        return true
+      })
+      .map(i => i.location.provinsi)
+  )
+
   const severities: Array<'critical'|'high'|'medium'|'low'> = ['critical','high','medium','low']
+
+  // Severities that have at least one case matching other active filters
+  const activeSeverities = new Set(
+    incidents
+      .filter(i => {
+        const d = new Date(i.source_date)
+        if (filters.year     && d.getFullYear() !== filters.year)     return false
+        if (filters.month != null && d.getMonth() !== filters.month)  return false
+        if (filters.provinsi && i.location.provinsi !== filters.provinsi) return false
+        return true
+      })
+      .map(i => i.severity)
+  )
 
   const activeCount = Object.values(filters).filter(v => v !== null).length
 
@@ -136,7 +163,8 @@ export default function FilterPanel({ incidents, filters, onFilterChange }: Prop
             <Chip
               key={p} label={p}
               active={filters.provinsi === p}
-              onClick={() => toggle('provinsi', p, filters.provinsi)}
+              disabled={!activeProvinces.has(p)}
+              onClick={() => activeProvinces.has(p) && toggle('provinsi', p, filters.provinsi)}
             />
           ))}
         </div>
@@ -150,8 +178,9 @@ export default function FilterPanel({ incidents, filters, onFilterChange }: Prop
             <Chip
               key={s} label={s.charAt(0).toUpperCase() + s.slice(1)}
               active={filters.severity === s}
+              disabled={!activeSeverities.has(s)}
               color={SEV_COLOR[s]}
-              onClick={() => toggle('severity', s, filters.severity)}
+              onClick={() => activeSeverities.has(s) && toggle('severity', s, filters.severity)}
             />
           ))}
         </div>
