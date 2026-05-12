@@ -27,10 +27,14 @@ jobs:
       - name: Run geoparse pipeline
         run: python pipeline/fetch_and_geoparse.py
 
-      - name: Commit updated incidents_live.json
+      - name: Commit if new incidents found
         run: |
           git config user.name  "TerraWitness Bot"
           git config user.email "bot@terrawitness.app"
           git add public/incidents_live.json pipeline/seen_hashes.json
-          git diff --cached --quiet || git commit -m "chore: update live incidents [skip ci]"
-          git push
+          if git diff --cached --quiet; then
+            echo "No new incidents — skipping commit"
+          else
+            git commit -m "chore: update live incidents [skip ci]"
+            git push
+          fi

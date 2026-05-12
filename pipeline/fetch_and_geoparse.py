@@ -14,8 +14,8 @@ Steps:
 Requires: feedparser, shapely, geopandas  (all free, pip install)
 """
 
-import json, hashlib, re, os, sys
-from datetime import datetime, timezone
+import json, hashlib, re
+from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
 import feedparser
@@ -90,13 +90,21 @@ def normalise(text: str) -> str:
 def article_id(url: str) -> str:
     return hashlib.md5(url.encode()).hexdigest()[:12]
 
-def load_seen() -> set:
-    if SEEN_FILE.exists():
-        return set(json.loads(SEEN_FILE.read_text()))
-    return set()
+SEEN_TTL_DAYS = 7   # articles older than this will never resurface in RSS
 
-def save_seen(seen: set):
-    SEEN_FILE.write_text(json.dumps(sorted(seen)))
+def load_seen() -> dict:
+    """Return {hash: iso_timestamp} — only entries from the last 7 days."""
+    if not SEEN_FILE.exists():
+        return {}
+    data = json.loads(SEEN_FILE.read_text())
+    # Support old format (plain list of hashes) by upgrading on the fly
+    if isinstance(data, list):
+        data = {h: datetime.now(timezone.utc).isoformat() for h in data}
+    cutoff = (datetime.now(timezone.utc) - timedelta(days=SEEN_TTL_DAYS)).isoformat()
+    return {h: ts for h, ts in data.items() if ts >= cutoff}
+
+def save_seen(seen: dict):
+    SEEN_FILE.write_text(json.dumps(seen, separators=(',', ':')))
 
 def is_relevant(title: str, summary: str) -> bool:
     text = normalise(f'{title} {summary}')
@@ -244,7 +252,7 @@ def run():
             uid = article_id(url)
             if uid in seen:
                 continue
-            seen.add(uid)
+            seen[uid] = datetime.now(timezone.utc).isoformat()
 
             if not is_relevant(title, summary):
                 continue
@@ -319,8 +327,8 @@ def run():
             new_count += 1
             print(f'    [NEW] {inc_id}  {kab}  {vtype}  {title[:50]}')
 
-    # Sort by date descending, keep latest 200
-    incidents = sorted(existing.values(), key=lambda x: x['post_date'], reverse=True)[:200]
+    # Sort by date descending, keep latest 500 (each ~1KB → ~500KB max)
+    incidents = sorted(existing.values(), key=lambda x: x['post_date'], reverse=True)[:500]
 
     OUT_JSON.write_text(json.dumps(incidents, ensure_ascii=False, indent=2))
     save_seen(seen)
