@@ -135,5 +135,15 @@
     "label": "Morowali IMIP coast",
     "source": "manual_corrected",
     "note": "IMIP Bahodopi coastal boundary, not BINEKA KARYA lease"
+  },
+  "TW-X-GECKO001": {
+    "signal_point": [
+      -1.52,
+      127.73
+    ],
+    "signal_type": "coastal",
+    "label": "Harita Nickel coastal zone, Pulau Obi",
+    "source": "manual",
+    "note": "Eastern Obi Island shoreline adjacent to PT Trimegah Bangun Persada operations"
   }
 }
