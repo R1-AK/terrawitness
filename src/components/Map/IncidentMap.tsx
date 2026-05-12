@@ -120,8 +120,8 @@ export default function IncidentMap({ incidents, selectedId, onSelect }: Props) 
       marker.on('click', () => onSelect(inc.id))
       markers.current[inc.id] = marker
 
-      // Pulse ring — only for verified/routed violations
-      if (inc.violation_flag && (inc.status === 'verified' || inc.status === 'routed')) {
+      // Pulse ring — all incidents
+      if (true) {
         const r = isSel ? 11 : 8
         const pulse = L.divIcon({
           className: '',
