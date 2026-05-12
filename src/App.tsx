@@ -66,56 +66,47 @@ export default function App() {
       {/* Header */}
       <header style={{
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        padding: '0 20px', height: '44px',
+        padding: '0 24px', height: '52px',
         borderBottom: '1px solid var(--border)',
         background: 'var(--surface)',
         flexShrink: 0, zIndex: 10,
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           <div style={{
-            width: '24px', height: '24px', borderRadius: '5px',
+            width: '30px', height: '30px', borderRadius: '6px',
             background: 'var(--accent)',
             display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
           }}>
-            <span style={{ color: '#fff', fontWeight: 800, fontSize: '10px', letterSpacing: '-0.02em', fontFamily: 'var(--font-mono)' }}>TW</span>
+            <span style={{ color: '#fff', fontWeight: 900, fontSize: '12px', letterSpacing: '-0.02em', fontFamily: 'var(--font-mono)' }}>TW</span>
           </div>
-          <span style={{ color: 'var(--text-1)', fontWeight: 700, fontSize: '14px', letterSpacing: '-0.02em' }}>TerraWitness</span>
-          <span style={{ color: 'var(--text-3)', fontSize: '12px' }}>Civic Satellite Verification</span>
+          <span style={{ color: 'var(--text-1)', fontWeight: 800, fontSize: '18px', letterSpacing: '-0.03em' }}>TerraWitness</span>
+          <span style={{ color: 'var(--text-3)', fontSize: '14px', fontWeight: 500 }}>Civic Satellite Verification</span>
           <div style={{
-            display: 'flex', alignItems: 'center', gap: '4px',
-            padding: '2px 7px', borderRadius: '3px',
+            display: 'flex', alignItems: 'center', gap: '5px',
+            padding: '3px 9px', borderRadius: '4px',
             background: 'rgba(196,28,28,0.07)', border: '1px solid rgba(196,28,28,0.15)',
           }}>
-            <span className="live-dot" style={{ width: '5px', height: '5px', borderRadius: '50%', background: 'var(--critical)', display: 'inline-block' }} />
-            <span style={{ fontSize: '10px', fontWeight: 700, color: 'var(--critical)', fontFamily: 'var(--font-mono)', letterSpacing: '0.08em' }}>LIVE</span>
+            <span className="live-dot" style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'var(--critical)', display: 'inline-block' }} />
+            <span style={{ fontSize: '12px', fontWeight: 800, color: 'var(--critical)', fontFamily: 'var(--font-mono)', letterSpacing: '0.08em' }}>LIVE</span>
           </div>
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-          {/* Source badges */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-            <span style={{ fontSize: '11px', color: 'var(--text-3)' }}>Sources:</span>
-            <span style={{
-              fontSize: '10px', fontWeight: 600, padding: '2px 7px', borderRadius: '3px',
-              background: isNewsSelected ? 'rgba(14,116,144,0.08)' : 'var(--surface-2)',
-              border: `1px solid ${isNewsSelected ? 'rgba(14,116,144,0.2)' : 'var(--border)'}`,
-              color: isNewsSelected ? 'var(--accent)' : 'var(--text-3)',
-              transition: 'all 0.15s',
-            }}>News</span>
-            <span style={{
-              fontSize: '10px', fontWeight: 600, padding: '2px 7px', borderRadius: '3px',
-              background: isSocialSelected ? 'rgba(14,116,144,0.08)' : 'var(--surface-2)',
-              border: `1px solid ${isSocialSelected ? 'rgba(14,116,144,0.2)' : 'var(--border)'}`,
-              color: isSocialSelected ? 'var(--accent)' : 'var(--text-3)',
-              transition: 'all 0.15s',
-            }}>Social Media</span>
-          </div>
-
-          <div style={{ width: '1px', height: '16px', background: 'var(--border)' }} />
-
-          <span style={{ fontSize: '11px', color: 'var(--text-3)' }}>
-            Maluku Utara · Sulawesi Tenggara
-          </span>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <span style={{ fontSize: '13px', fontWeight: 600, color: 'var(--text-3)' }}>Sources:</span>
+          <span style={{
+            fontSize: '12px', fontWeight: 700, padding: '3px 10px', borderRadius: '4px',
+            background: isNewsSelected ? 'rgba(14,116,144,0.08)' : 'var(--surface-2)',
+            border: `1px solid ${isNewsSelected ? 'rgba(14,116,144,0.2)' : 'var(--border)'}`,
+            color: isNewsSelected ? 'var(--accent)' : 'var(--text-3)',
+            transition: 'all 0.15s',
+          }}>News</span>
+          <span style={{
+            fontSize: '12px', fontWeight: 700, padding: '3px 10px', borderRadius: '4px',
+            background: isSocialSelected ? 'rgba(14,116,144,0.08)' : 'var(--surface-2)',
+            border: `1px solid ${isSocialSelected ? 'rgba(14,116,144,0.2)' : 'var(--border)'}`,
+            color: isSocialSelected ? 'var(--accent)' : 'var(--text-3)',
+            transition: 'all 0.15s',
+          }}>Social Media</span>
         </div>
       </header>
 
