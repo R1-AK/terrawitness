@@ -57,8 +57,8 @@ export default function App() {
   const hasFilters = Object.values(filters).some(v => v !== null)
 
   const SOCIAL_TYPES = new Set(['social_media', 'public_social_post'])
-  const isSocialSelected = selectedIncident ? SOCIAL_TYPES.has(selectedIncident.source_type) : false
-  const isNewsSelected   = selectedIncident ? !SOCIAL_TYPES.has(selectedIncident.source_type) : false
+  const isSocialSelected = !!selectedIncident && SOCIAL_TYPES.has(selectedIncident.source_type)
+  const isNewsSelected   = !isSocialSelected
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100vh', background: 'var(--bg)' }}>
