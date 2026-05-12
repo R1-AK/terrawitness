@@ -71,11 +71,10 @@ def fetch_channel(channel: str) -> list[dict]:
         print(f'  [{channel}] Error: {e}')
         return []
 
-    # Debug: print snippet to understand structure when nothing found
-    has_messages = 'tgme_widget_message' in html
-    if not has_messages:
-        print(f'  [{channel}] No message elements in page — channel may not exist or has no web preview')
-        print(f'  [{channel}] Page snippet: {html[:300]}')
+    # t.me/s/ only works for public broadcast channels.
+    # If Telegram returns a "Contact @..." page, the handle is a user/group, not a channel.
+    if 'Telegram: Contact @' in html or 'tgme_widget_message' not in html:
+        print(f'  [{channel}] Not a public broadcast channel — update CHANNELS list with correct handle')
         return []
 
     messages = []
@@ -98,7 +97,7 @@ def fetch_channel(channel: str) -> list[dict]:
             html, re.DOTALL
         )
 
-    print(f'  [{channel}] Found {len(posts)} posts, {len(datetimes)} times, {len(raw_texts)} texts')
+    print(f'  [{channel}] Parsing: {len(posts)} post blocks, {len(datetimes)} timestamps, {len(raw_texts)} text blocks')
 
     for i, post in enumerate(posts):
         text_raw = raw_texts[i] if i < len(raw_texts) else ''
