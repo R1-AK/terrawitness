@@ -138,12 +138,12 @@
   },
   "TW-X-GECKO001": {
     "signal_point": [
-      -1.52,
-      127.73
+      -1.47,
+      127.38
     ],
     "signal_type": "coastal",
-    "label": "Harita Nickel coastal zone, Pulau Obi",
+    "label": "Kawasi Bay, Pulau Obi — Harita Nickel",
     "source": "manual",
-    "note": "Eastern Obi Island shoreline adjacent to PT Trimegah Bangun Persada operations"
+    "note": "Western Obi Island shoreline at Kawasi Bay, adjacent to PT Trimegah Bangun Persada open pit"
   }
 }

@@ -483,9 +483,9 @@ export const MOCK_INCIDENTS: Incident[] = [
     status: 'geoparsing',
     severity: 'high',
     location: {
-      lat: -1.48,
-      lng: 127.70,
-      desa: '-',
+      lat: -1.47,
+      lng: 127.43,
+      desa: 'Kawasi',
       kecamatan: 'Obi',
       kabupaten: 'Halmahera Selatan',
       provinsi: 'Maluku Utara',
