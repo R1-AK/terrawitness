@@ -1,1 +1,84 @@
-[]
+[
+  {
+    "id": "TW-AUTO-9844BDFE3CB7",
+    "status": "geoparsing",
+    "severity": "critical",
+    "location": {
+      "lat": -1.5647,
+      "lng": 121.9519,
+      "desa": "-",
+      "kecamatan": "-",
+      "kabupaten": "morowali",
+      "provinsi": "-"
+    },
+    "violation_type": "illegal_clearing",
+    "zone_name": "morowali land zone",
+    "zone_type": "land",
+    "violation_flag": true,
+    "change_score": 0.95,
+    "ndvi_before": 0.0,
+    "ndvi_after": 0.0,
+    "area_ha": 0,
+    "post_text": "Kawasan Industri Nikel di Kabupaten Morowali dan Morowali Utara, Sulawesi Tengah (Sulteng) membawa dampak kesehatan dan lingkungan. Studi terbaru Komisi Nasional Hak Asasi Manusia (Komnas HAM) menemukan kerusakan tidak hanya pada pada ruang hidup fisik, melainkan juga pada udara karena polusi debu l",
+    "post_date": "2026-05-12T03:50:06.260515+00:00",
+    "report_date": "2026-05-12",
+    "source_type": "investigation",
+    "source_name": "Mongabay Indonesia",
+    "source_url": "https://mongabay.co.id/2026/05/08/kajian-komnas-ham-sebut-kawasan-industri-nikel-korbankan-lingkungan-dan-kesehatan/",
+    "source_date": "2026-05-12",
+    "concession_holder": null,
+    "lease_match": {
+      "name": "ANUGERAH ARGA PRATAMA",
+      "activity": "OPERASI PRODUKSI",
+      "commodity": "NIKEL",
+      "area_ha": 1855.0,
+      "dist_km": 0.0,
+      "centroid": [
+        -1.56467,
+        121.95186
+      ]
+    },
+    "signal_type": "land"
+  },
+  {
+    "id": "TW-AUTO-23DB625A3CE9",
+    "status": "geoparsing",
+    "severity": "critical",
+    "location": {
+      "lat": -4.0679,
+      "lng": 122.0954,
+      "desa": "akuni",
+      "kecamatan": "tinanggea",
+      "kabupaten": "konawe",
+      "provinsi": "-"
+    },
+    "violation_type": "illegal_clearing",
+    "zone_name": "konawe coastal zone",
+    "zone_type": "coastal",
+    "violation_flag": true,
+    "change_score": 0.95,
+    "ndvi_before": 0.0,
+    "ndvi_after": 0.0,
+    "area_ha": 0,
+    "post_text": "La Ode Baharuddin,  baru saja pulang dari laut. Lumpur membalut punggung kaki sampai betis seusai mencari burungo atau keong bakau (Telescopium telescopium) di Desa Akuni, Kecamatan Tinanggea, Kabupaten Konawe Selatan, Sulawesi Tenggara. Pekerjaan itu dia tekuni sejak budi daya rumput laut, yang dul",
+    "post_date": "2026-05-12T03:50:06.257275+00:00",
+    "report_date": "2026-05-12",
+    "source_type": "investigation",
+    "source_name": "Mongabay Indonesia",
+    "source_url": "https://mongabay.co.id/2026/05/11/runtuhnya-kejayaan-budidaya-rumput-laut-tinanggea-karena-nikel/",
+    "source_date": "2026-05-12",
+    "concession_holder": null,
+    "lease_match": {
+      "name": "CITRA ARYA SENTOSA HUTAMA",
+      "activity": "OPERASI PRODUKSI",
+      "commodity": "NIKEL",
+      "area_ha": 420.0,
+      "dist_km": 0.0,
+      "centroid": [
+        -4.0679,
+        122.0954
+      ]
+    },
+    "signal_type": "coastal"
+  }
+]
