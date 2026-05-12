@@ -15,6 +15,7 @@ const SOURCE_LABEL: Record<Incident['source_type'], string> = {
   investigation:      'Investigative reporting',
   official_statement: 'Official statement',
   public_social_post: 'Public social post',
+  social_media:       'Social media post',
 }
 
 const SEV_COLOR: Record<string, string> = {
@@ -44,7 +45,7 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
 
 export default function EvidenceCard({ incident, onClose }: Props) {
   const sevColor = SEV_COLOR[incident.severity]
-  const sourceLinkLabel = incident.source_type === 'public_social_post' ? 'Open post' : 'Open source article'
+  const sourceLinkLabel = (incident.source_type === 'public_social_post' || incident.source_type === 'social_media') ? 'Open post' : 'Open source article'
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', flex: 1, overflow: 'hidden' }}>
