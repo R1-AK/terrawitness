@@ -2,7 +2,7 @@ name: Geoparse RSS feeds
 
 on:
   schedule:
-    - cron: '0 */2 * * *'   # every 2 hours, free on GitHub Actions
+    - cron: '0 2 * * *'     # daily at 02:00 UTC
   workflow_dispatch:         # manual trigger from GitHub UI
 
 jobs:
