@@ -71,23 +71,40 @@ def fetch_channel(channel: str) -> list[dict]:
         print(f'  [{channel}] Error: {e}')
         return []
 
+    # Debug: print snippet to understand structure when nothing found
+    has_messages = 'tgme_widget_message' in html
+    if not has_messages:
+        print(f'  [{channel}] No message elements in page — channel may not exist or has no web preview')
+        print(f'  [{channel}] Page snippet: {html[:300]}')
+        return []
+
     messages = []
-    # Split HTML by message wrapper — each chunk is one Telegram post
-    blocks = re.split(r'(?=<div class="tgme_widget_message_wrap)', html)
 
-    for block in blocks:
-        post_m = re.search(r'data-post="([^"]+)"', block)
-        time_m = re.search(r'datetime="([^"]+)"', block)
-        text_m = re.search(
-            r'class="tgme_widget_message_text[^"]*"[^>]*>(.*?)</div>',
-            block, re.DOTALL
+    # Extract all data-post attributes, datetimes, and text blocks independently
+    # then zip them — Telegram renders one of each per message in document order
+    posts     = re.findall(r'data-post="([^"]+)"', html)
+    datetimes = re.findall(r'<time[^>]+datetime="([^"]+)"', html)
+
+    # Text: find all message text divs (class may include extra names like js-message_text)
+    raw_texts = re.findall(
+        r'class="tgme_widget_message_text[^"]*"[^>]*>(.*?)</div>\s*</div>',
+        html, re.DOTALL
+    )
+
+    # Fallback: broader text extraction if the above misses
+    if not raw_texts:
+        raw_texts = re.findall(
+            r'tgme_widget_message_text[^>]*>(.*?)</div>',
+            html, re.DOTALL
         )
-        if not (post_m and time_m and text_m):
-            continue
 
-        raw_text = text_m.group(1)
-        # Strip HTML tags, decode common entities
-        text = re.sub(r'<[^>]+>', ' ', raw_text)
+    print(f'  [{channel}] Found {len(posts)} posts, {len(datetimes)} times, {len(raw_texts)} texts')
+
+    for i, post in enumerate(posts):
+        text_raw = raw_texts[i] if i < len(raw_texts) else ''
+        dt       = datetimes[i] if i < len(datetimes) else ''
+
+        text = re.sub(r'<[^>]+>', ' ', text_raw)
         text = text.replace('&amp;', '&').replace('&lt;', '<').replace('&gt;', '>')
         text = re.sub(r'\s+', ' ', text).strip()
 
@@ -96,12 +113,12 @@ def fetch_channel(channel: str) -> list[dict]:
 
         messages.append({
             'text':       text,
-            'created_at': time_m.group(1),
-            'url':        f'https://t.me/{post_m.group(1)}',
+            'created_at': dt,
+            'url':        f'https://t.me/{post}',
             'channel':    channel,
         })
 
-    print(f'  [{channel}] {len(messages)} posts retrieved')
+    print(f'  [{channel}] {len(messages)} usable posts')
     return messages
 
 
