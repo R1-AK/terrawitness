@@ -1,5 +1,46 @@
 [
   {
+    "id": "TW-AUTO-9F6AE174CBB4",
+    "status": "geoparsing",
+    "severity": "critical",
+    "location": {
+      "lat": -1.6618,
+      "lng": 127.8172,
+      "desa": "kawasi",
+      "kecamatan": "-",
+      "kabupaten": "halmahera selatan",
+      "provinsi": "-"
+    },
+    "violation_type": "illegal_clearing",
+    "zone_name": "halmahera selatan land zone",
+    "zone_type": "land",
+    "violation_flag": true,
+    "change_score": 0.95,
+    "ndvi_before": 0.0,
+    "ndvi_after": 0.0,
+    "area_ha": 0,
+    "post_text": "Ketika tambang dan kawasan industri nikel masuk Pulau Obi, Halmahera Selatan, Maluku Utara, masyarakat alami dampak multi. Dari kehilangan sumber pangan, seperti hutan sagu yang tergerus, sampai pencemaran lingkungan. Tak pelak, investasi masuk wilayah mereka, alih-alih warga nikmati kesejahteraan,",
+    "post_date": "2026-06-04T17:15:40+00:00",
+    "report_date": "2026-06-04",
+    "source_type": "investigation",
+    "source_name": "Mongabay Indonesia",
+    "source_url": "https://mongabay.co.id/2026/06/04/kala-warga-pulau-obi-gugat-predikat-hijau-harita-nikel/",
+    "source_date": "2026-06-04",
+    "concession_holder": null,
+    "lease_match": {
+      "name": "INTIM MINING SENTOSA",
+      "activity": "OPERASI PRODUKSI",
+      "commodity": "NIKEL DMP",
+      "area_ha": 3185.0,
+      "dist_km": 0.0,
+      "centroid": [
+        -1.66175,
+        127.81725
+      ]
+    },
+    "signal_type": "land"
+  },
+  {
     "id": "TW-AUTO-9844BDFE3CB7",
     "status": "geoparsing",
     "severity": "critical",
