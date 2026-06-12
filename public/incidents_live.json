@@ -1,5 +1,46 @@
 [
   {
+    "id": "TW-AUTO-E8AD3F7CD48F",
+    "status": "geoparsing",
+    "severity": "critical",
+    "location": {
+      "lat": -4.0679,
+      "lng": 122.0954,
+      "desa": "bajo",
+      "kecamatan": "soropia",
+      "kabupaten": "konawe",
+      "provinsi": "-"
+    },
+    "violation_type": "illegal_clearing",
+    "zone_name": "konawe coastal zone",
+    "zone_type": "coastal",
+    "violation_flag": true,
+    "change_score": 0.95,
+    "ndvi_before": 0.0,
+    "ndvi_after": 0.0,
+    "area_ha": 0,
+    "post_text": "Hartati sedang duduk bersama suaminya, Mardin, di teras belakang rumah panggung yang berdiri di atas laut di Desa Bajo Indah, satu dari tujuh perkampungan Suku Bajo di Kecamatan Soropia, Kabupaten Konawe Sulawesi Tenggara, Selasa (19/5/26). Ibu empat anak ini sibuk menggunting jala rusak dan memisah",
+    "post_date": "2026-06-12T03:51:36+00:00",
+    "report_date": "2026-06-12",
+    "source_type": "investigation",
+    "source_name": "Mongabay Indonesia",
+    "source_url": "https://mongabay.co.id/2026/06/12/nasib-perempuan-bajo-di-pesisir-soropia/",
+    "source_date": "2026-06-12",
+    "concession_holder": null,
+    "lease_match": {
+      "name": "CITRA ARYA SENTOSA HUTAMA",
+      "activity": "OPERASI PRODUKSI",
+      "commodity": "NIKEL",
+      "area_ha": 420.0,
+      "dist_km": 0.0,
+      "centroid": [
+        -4.0679,
+        122.0954
+      ]
+    },
+    "signal_type": "coastal"
+  },
+  {
     "id": "TW-AUTO-9F6AE174CBB4",
     "status": "geoparsing",
     "severity": "critical",
