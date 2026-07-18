@@ -1,5 +1,46 @@
 [
   {
+    "id": "TW-AUTO-0ADA3D5EADC9",
+    "status": "geoparsing",
+    "severity": "critical",
+    "location": {
+      "lat": -4.4165,
+      "lng": 122.4503,
+      "desa": "akuni",
+      "kecamatan": "-",
+      "kabupaten": "konawe selatan",
+      "provinsi": "-"
+    },
+    "violation_type": "illegal_clearing",
+    "zone_name": "konawe selatan coastal zone",
+    "zone_type": "coastal",
+    "violation_flag": true,
+    "change_score": 0.95,
+    "ndvi_before": 0.0,
+    "ndvi_after": 0.0,
+    "area_ha": 0,
+    "post_text": "Dulu, La Ode Baharuddin tak pernah menyangka akan menghabiskan hari-harinya mencari keong bakau di lumpur bakau Desa Akuni, Konawe Selatan, Sulawesi Tenggara. Bertahun-tahun lalu, dia adalah petani rumput laut yang hidup dari komoditas dulunya sangat menjanjikan. Bahkan, desanya sempat dijuluki &#82",
+    "post_date": "2026-07-18T00:01:37+00:00",
+    "report_date": "2026-07-18",
+    "source_type": "investigation",
+    "source_name": "Mongabay Indonesia",
+    "source_url": "https://mongabay.co.id/short-article/2026/07/sejak-laut-tercemar-petani-rumput-laut-tinanggea-kehilangan-segalanya/",
+    "source_date": "2026-07-18",
+    "concession_holder": null,
+    "lease_match": {
+      "name": "WIJAYA INTI NUSANTARA",
+      "activity": "OPERASI PRODUKSI",
+      "commodity": "NIKEL DMP",
+      "area_ha": 1931.0,
+      "dist_km": 0.0,
+      "centroid": [
+        -4.41655,
+        122.45025
+      ]
+    },
+    "signal_type": "coastal"
+  },
+  {
     "id": "TW-AUTO-E8AD3F7CD48F",
     "status": "geoparsing",
     "severity": "critical",
