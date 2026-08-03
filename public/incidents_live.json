@@ -1,5 +1,46 @@
 [
   {
+    "id": "TW-AUTO-0514F8B06E8E",
+    "status": "geoparsing",
+    "severity": "critical",
+    "location": {
+      "lat": -0.4431,
+      "lng": 129.8832,
+      "desa": "-",
+      "kecamatan": "-",
+      "kabupaten": "raja ampat",
+      "provinsi": "-"
+    },
+    "violation_type": "illegal_clearing",
+    "zone_name": "raja ampat land zone",
+    "zone_type": "land",
+    "violation_flag": true,
+    "change_score": 0.95,
+    "ndvi_before": 0.0,
+    "ndvi_after": 0.0,
+    "area_ha": 0,
+    "post_text": "&#160; “Protect Raja Ampat, Stop Dirty Energy” “Is Your Car Powered by Forest Destruction?”  “Just Transition Energi Now” “Tramsisi energi tanpa merusak hutan” Begitu antara lain spanduk para aktivis Grenpeace Indonesia bentangkan dalam aksi damai saat Menteri Perindustrian Agus Gumiwang Kartasasmit",
+    "post_date": "2026-08-03T05:25:54.657376+00:00",
+    "report_date": "2026-08-03",
+    "source_type": "investigation",
+    "source_name": "Mongabay Indonesia",
+    "source_url": "https://mongabay.co.id/2026/08/02/nikel-raja-ampat-greenpeace-desak-industri-otomotif-telusur-rantai-pasok/",
+    "source_date": "2026-08-03",
+    "concession_holder": null,
+    "lease_match": {
+      "name": "GAG NIKEL",
+      "activity": "OPERASI PRODUKSI",
+      "commodity": "NIKEL",
+      "area_ha": 13136.0,
+      "dist_km": 0.0,
+      "centroid": [
+        -0.44306,
+        129.88322
+      ]
+    },
+    "signal_type": "land"
+  },
+  {
     "id": "TW-AUTO-0ADA3D5EADC9",
     "status": "geoparsing",
     "severity": "critical",
