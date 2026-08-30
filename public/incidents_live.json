@@ -1,5 +1,46 @@
 [
   {
+    "id": "TW-AUTO-14C1020A4A49",
+    "status": "geoparsing",
+    "severity": "critical",
+    "location": {
+      "lat": -4.0679,
+      "lng": 122.0954,
+      "desa": "wawatu",
+      "kecamatan": "moramo",
+      "kabupaten": "konawe",
+      "provinsi": "-"
+    },
+    "violation_type": "river_contamination",
+    "zone_name": "konawe teluk zone",
+    "zone_type": "teluk",
+    "violation_flag": true,
+    "change_score": 0.95,
+    "ndvi_before": 0.0,
+    "ndvi_after": 0.0,
+    "area_ha": 0,
+    "post_text": "Bekas bukaan tambang batu gamping pada gugusan perbukitan tampak dari permukiman di Desa Wawatu, Kecamatan Moramo Utara, Kabupaten Konawe Selatan, Sulawesi Tenggara. Di sekitar dermaga desa, air laut keruh berwarna cokelat kemerahan. Teluk Moramo, kawasan konservasi perairan yang jadi rumah ikan nap",
+    "post_date": "2026-08-30T07:34:41.031734+00:00",
+    "report_date": "2026-08-30",
+    "source_type": "investigation",
+    "source_name": "Mongabay Indonesia",
+    "source_url": "https://mongabay.co.id/2026/08/30/kawasan-konservasi-teluk-moramo-habitat-penting-napoleon-dalam-ancaman-tambang/",
+    "source_date": "2026-08-30",
+    "concession_holder": null,
+    "lease_match": {
+      "name": "CITRA ARYA SENTOSA HUTAMA",
+      "activity": "OPERASI PRODUKSI",
+      "commodity": "NIKEL",
+      "area_ha": 420.0,
+      "dist_km": 0.0,
+      "centroid": [
+        -4.0679,
+        122.0954
+      ]
+    },
+    "signal_type": "teluk"
+  },
+  {
     "id": "TW-AUTO-0514F8B06E8E",
     "status": "geoparsing",
     "severity": "critical",
